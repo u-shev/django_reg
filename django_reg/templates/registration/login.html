@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+
+{% block content %}
+    <h1 class="my-4">{{ title }}</h1>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+<div class="link m-3">
+<a class="link-opacity-100"  href="{% url 'create_user' %}">Зарегистрироваться</a>
+</div>
+<div class="link m-3">
+    <a class="link-opacity-100"  href="{% url 'password_reset' %}">Забыли пароль?</a>
+</div>
+{% endblock %}

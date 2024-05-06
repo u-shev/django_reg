@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+    <h1 class="my-4">Профиль пользователя {{ user.username }}</h1>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <td>Логин: {{ user.username }}</td>
+                <td>Имя пользователя: {{ user.first_name }} {{ user.last_name }}</td>
+                <td>Дата регистрации: {{ user.date_joined|date:"d.m.Y H:i" }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if user.is_authenticated and user == request.user %}
+    <td><a href="{% url 'update_user' user.id %}"> Изменить профиль</a></td>
+    <br>
+    <td><a href="{% url 'password_change' %}"> Изменить пароль</a></td>
+    <br>
+    <td><a href="{% url 'change_email' user.id %}"> Изменить адрес электронной почты</a></td>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,7 @@
+.venv
+django_reg/django_reg/__pycache__/
+django_reg/django_reg/.env
+django_reg/users/__pycache__/
+django_reg/users/migrations/__pycache__/
+db.sqlite3
+staticfiles

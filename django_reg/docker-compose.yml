@@ -1,0 +1,51 @@
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - ./django_reg:/django_reg
+      - media:/django_reg/mediafiles
+      - static:/django_reg/staticfiles
+    env_file:
+      - ./django_reg/.env
+    ports:
+      - 8000:8000
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py createsuperuser --noinput &&
+             gunicorn -w 5 -b 0.0.0.0:8000 django_reg.wsgi"
+
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14.6-alpine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    env_file:
+      - ./django_reg/.env
+
+  redis:
+    image: redis:7.0.5
+    hostname: redis
+
+  celery:
+    build:
+      context: .
+    command: celery -A django_reg worker -l info
+    volumes:
+      - ./django_reg:/django_reg
+    env_file:
+      - ./django_reg/.env
+    links:
+      - redis
+    depends_on:
+      - redis
+      - database
+
+volumes:
+  postgres-data:
+  static:
+  media:
