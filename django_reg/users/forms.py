@@ -12,12 +12,11 @@ class UserForm(UserCreationForm):
                   'password1', 'password2')
 
 
-class UserUpdateForm(UserCreationForm):
+class UserUpdateForm(UserChangeForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'first_name', 'last_name',
-                  'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name')
 
 
 class EmailChangeForm(UserChangeForm):

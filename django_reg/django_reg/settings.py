@@ -76,16 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'django_reg.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -160,10 +150,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_BROKER_URL = 'redis://redis:6379/0'
-CELERY_RESULT_BACKEND = "redis://redis:6379/0"
-# CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525

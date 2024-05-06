@@ -16,16 +16,6 @@ class UserLoginRequiredMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-# class UserIsNotAuthenticated(UserPassesTestMixin):
-#     def get_test_func(self):
-#         if self.request.user.is_authenticated:
-#             messages.info(self.request, 'Вы уже авторизованы.')
-#         return self.test_func
-
-#     def handle_no_permission(self):
-#         return redirect('home')
-
-
 class UserPermissionMixin(UserPassesTestMixin):
 
     def test_func(self):
